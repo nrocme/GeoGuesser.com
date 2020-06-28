@@ -9,15 +9,33 @@
         ></script>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="./stylesheet.css">
-        <script src="./app.js"></script>
+        <script type ="text/javascript" src="./app.js"></script>
+        <script type ="text/javascript" src="./skins.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D62YFQXCS"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0D62YFQXCS');
+        </script>
     </head>
     <body>
         <div class="parent">
-        <table align="center">
+        <table align = "center">
             <tr>
-                <td> <button type="button" onclick="newSpot()">Play</button>
-                <td> <button type="button" onclick="guess()">Guess</button>
+                <td> <button type="button" class= "controls" onclick="newSpot()">Play</button>
+                <td> <button type="button" class= "controls" onclick="guess()">Guess</button>
                 <td id="result">
+        </table>
+        <table>
+            <tr>
+                <td align="center" colspan="3" id="result"> Map Settings
+            <tr>
+                <td> <button type="button" class="mapSettings" onclick="changeMap(0)">Standard</button>
+                <td> <button type="button" class="mapSettings" onclick="changeMap(1)">Dark</button>
+                <td> <button type="button" class="mapSettings" onclick="changeMap(2)">Night</button>
         </table>
             <div id="pano"></div>
             <div id="map"></div>

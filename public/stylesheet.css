@@ -10,6 +10,12 @@
     position: relative;
     height: 90%;
 }
+.mapSettings {
+    padding: .15em 1em;
+}
+.controls {
+    padding: 1em 3em;
+}
 #map {
     position: absolute;
     height: 35%;
@@ -37,17 +43,14 @@
 #controls {
     height: 5%;
 }
+
 #result {
-    color: red;
+    color: #32CD32;
 }
 .parent {
     background-color: black;
 }
 /* Optional: Makes the sample page fill the window. */
-button {
-    height: 50px;
-    width: 100px;
-}
 html,
 body {
     background-color: black;
