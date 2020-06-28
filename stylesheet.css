@@ -6,12 +6,22 @@
 }
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+.parent {
+    position: relative;
+    height: 100%;
+}
 #map {
-    height: 50%;
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    z-index: 1;
 }
 
 #pano {
-    height: 50%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
 }
 
 #controls {
