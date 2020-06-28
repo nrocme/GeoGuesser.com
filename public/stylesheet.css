@@ -8,13 +8,23 @@
        * element that contains the map. */
 .parent {
     position: relative;
-    height: 100%;
+    height: 90%;
 }
 #map {
     position: absolute;
-    height: 25%;
+    height: 35%;
     width: 25%;
+    margin-left: 1%;
+    margin-top: 1%;
+    opacity: .5;
     z-index: 1;
+}
+
+#map:hover {
+    height: 50%;
+    width: 40%;
+    opacity: 1.0;
+
 }
 
 #pano {
@@ -27,7 +37,15 @@
 #controls {
     height: 5%;
 }
+
+.parent {
+    background-color: black;
+}
 /* Optional: Makes the sample page fill the window. */
+button {
+    height: 50px;
+    width: 100px;
+}
 html,
 body {
   height: 100%;

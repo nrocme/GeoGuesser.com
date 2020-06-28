@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Geo Guesser Clone </title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsxh8outvRYcXeLoYONFgDnpckEOXMC0U&callback=initMap&libraries=&v=weekly"
+        defer
+        ></script>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+        <script src="./app.js"></script>
+    </head>
+    <body>
+        <div class="parent">
+        <table align="center">
+            <tr>
+                <td> <button type="button" onclick="newSpot()">Play</button>
+                <td> <button type="button" onclick="guess()">Guess</button>
+                <td id="test">
+        </table>
+            <div id="pano"></div>
+            <div id="map"></div>
+        </div>
+    </body>
+</html>

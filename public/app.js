@@ -2,9 +2,10 @@ var map, marker, panorama, marker2;
 
 function initMap() {
     var coords = {lat: 0, lng: 0}
+    newSpot();
     map = new google.maps.Map(document.getElementById("map"), {
         center: coords,
-        zoom: 0,
+        zoom: 1,
         disableDefaultUI: true
 
     });
@@ -14,16 +15,33 @@ function initMap() {
             pov: {
                 heading: 0,
                 pitch: 0
-            }
-        });
-    map.setStreetView(panorama);
+            },
+            disableDefaultUI: true,
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: true,
+            streetViewControl: true,
+            rotateControl: true,
+            fullscreenControl: true,
+            linksControl: true,
+            panControl: true
+    });
     
+    map.setStreetView(panorama);
     marker = new google.maps.Marker({
         position: {lat: 0, lng: 0},
         map: map,
         draggable:true,
-        title:"Drag me!"
+        title:"Your Guess"
+    
     });
+    map.addListener('click', function(event) {
+        moveMarker(event.latLng);
+  });
+}
+
+function moveMarker(pnt) {
+    marker.setPosition(pnt);
 }
 function newSpot() {
     try {
@@ -59,6 +77,7 @@ function guess() {
         position: panorama.getPosition(),
         map: map,
         draggable:false,
+        title: "location"
     });
 }
 
