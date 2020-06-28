@@ -1,11 +1,95 @@
 var map, marker, panorama, marker2;
-
+var darkMode = [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
 function initMap() {
+    var image = {
+        url: './images/question.png',
+        // This marker is 20 pixels wide by 32 pixels high.
+    }
     var coords = {lat: 0, lng: 0}
     newSpot();
     map = new google.maps.Map(document.getElementById("map"), {
         center: coords,
         zoom: 1,
+        styles: darkMode,
         disableDefaultUI: true
 
     });
@@ -32,8 +116,8 @@ function initMap() {
         position: {lat: 0, lng: 0},
         map: map,
         draggable:true,
-        title:"Your Guess"
-    
+        title:"Your Guess",
+        icon: image
     });
     map.addListener('click', function(event) {
         moveMarker(event.latLng);
@@ -43,6 +127,7 @@ function initMap() {
 function moveMarker(pnt) {
     marker.setPosition(pnt);
 }
+
 function newSpot() {
     try {
         marker2.setMap(null);
@@ -62,9 +147,6 @@ function processSVData(data, status) {
     }
 }
 
-function getPos() {
-    document.getElementById("test").innerHTML = panorama.getPosition().lat();
-}
 
 function guess() {
     var lat1 = panorama.getPosition().lat();
@@ -72,11 +154,16 @@ function guess() {
     var lat2 = marker.getPosition().lat();
     var lng2 = marker.getPosition().lng();
     
-    document.getElementById("test").innerHTML = Math.floor(metertoMile(haversine(lat1, lat2, lng1, lng2))) + " Miles";
+    document.getElementById("result").innerHTML = metertoMile(haversine(lat1, lat2, lng1, lng2)).toFixed(3) + " Miles Away";
+        var image = {
+        url: './images/correct_ping_white_outline.png',
+        // This marker is 20 pixels wide by 32 pixels high.
+    }
     marker2 = new google.maps.Marker({
         position: panorama.getPosition(),
         map: map,
         draggable:false,
+        icon: image,
         title: "location"
     });
 }

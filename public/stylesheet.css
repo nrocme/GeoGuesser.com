@@ -16,7 +16,7 @@
     width: 25%;
     margin-left: 1%;
     margin-top: 1%;
-    opacity: .5;
+    opacity: .75;
     z-index: 1;
 }
 
@@ -37,7 +37,9 @@
 #controls {
     height: 5%;
 }
-
+#result {
+    color: red;
+}
 .parent {
     background-color: black;
 }
@@ -48,7 +50,8 @@ button {
 }
 html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    background-color: black;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
