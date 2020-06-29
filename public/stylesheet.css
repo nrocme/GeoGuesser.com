@@ -6,15 +6,16 @@
 }
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-.parent {
-    position: relative;
-    height: 90%;
-}
 .mapSettings {
     padding: .15em 1em;
 }
 .controls {
     padding: 1em 3em;
+}
+#gameContainer {
+    margin-left: 2.5%;
+    margin-top: 1%;
+    margin-right: 2.5%;
 }
 #map {
     position: absolute;
@@ -35,8 +36,8 @@
 
 #pano {
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: 90%;
+    width: 95%;
     z-index: 0;
 }
 
@@ -47,14 +48,19 @@
 #result {
     color: #32CD32;
 }
+#mapSettingsContainer {
+    margin-left: 5%;
+}
 .parent {
     background-color: black;
+    margin-top: 1%;
 }
 /* Optional: Makes the sample page fill the window. */
 html,
 body {
     background-color: black;
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }

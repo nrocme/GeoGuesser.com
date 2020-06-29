@@ -1,10 +1,11 @@
-var map, marker, panorama, marker2;
-var coords;
+var map, marker, panorama, marker2, infowindow, coords, contentString, answer;
+
 function initMap() 
 {
     var image = {
         url: './images/question.png',
     }
+
     coords = {lat: 0, lng: 0}
     newSpot();
     var nightType = new google.maps.StyledMapType(nightMode, {name: 'nightMode'});
@@ -53,7 +54,7 @@ function initMap()
     });
     map.addListener('click', function(event) {
         moveMarker(event.latLng);
-  });
+    });
 }
 
 function moveMarker(pnt) 
@@ -102,11 +103,16 @@ function guess()
     var lat2 = marker.getPosition().lat();
     var lng2 = marker.getPosition().lng();
     
-    document.getElementById("result").innerHTML = metertoMile(haversine(lat1, lat2, lng1, lng2)).toFixed(3) + " Miles Away";
+    answer = metertoMile(haversine(lat1, lat2, lng1, lng2)).toFixed(3).toString() + " Miles Away";
         var image = {
         url: './images/correct_ping_white_outline.png',
         // This marker is 20 pixels wide by 32 pixels high.
     }
+    contentString = '<div id="content">'+'Your were :' + '<div id="result">' + answer
+      +'</div>';
+    infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
     marker2 = new google.maps.Marker({
         position: panorama.getPosition(),
         map: map,
@@ -114,6 +120,7 @@ function guess()
         icon: image,
         title: "location"
     });
+    displayPopup(contentString);
 }
 
 function haversine(lat1, lat2, lng1, lng2)
@@ -146,4 +153,8 @@ function getRandomLatLng(max)
     return num;
 }
 
+function displayPopup(content)
+{
+    infowindow.open(map, marker);
+}
 

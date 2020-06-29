@@ -29,7 +29,7 @@
                 <td> <button type="button" class= "controls" onclick="guess()">Guess</button>
                 <td id="result">
         </table>
-        <table>
+        <table id = "mapSettingsContainer">
             <tr>
                 <td align="center" colspan="3" id="result"> Map Settings
             <tr>
@@ -37,8 +37,10 @@
                 <td> <button type="button" class="mapSettings" onclick="changeMap(1)">Dark</button>
                 <td> <button type="button" class="mapSettings" onclick="changeMap(2)">Night</button>
         </table>
+            <div id="gameContainer">
             <div id="pano"></div>
             <div id="map"></div>
+            </div>
         </div>
     </body>
 </html>
