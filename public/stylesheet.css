@@ -1,9 +1,3 @@
-@font-face {
-  font-family: minecraftFont;
-  src: url(minecraft-webfont.woff);
-  font-weight: bold;
-  font-display: swap;
-}
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 .mapSettings {
@@ -12,6 +6,7 @@
 .controls {
     padding: 1em 3em;
 }
+
 #gameContainer {
     margin-left: 2.5%;
     margin-top: 1%;
@@ -40,27 +35,41 @@
     width: 95%;
     z-index: 0;
 }
-
-#controls {
-    height: 5%;
-}
-
-#result {
-    color: #32CD32;
-}
 #mapSettingsContainer {
     margin-left: 5%;
 }
-.parent {
-    background-color: black;
-    margin-top: 1%;
+
+#result {
+    color: black;
 }
+.parent {
+    margin-top: 2%;
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+button:hover {
+    background-color: white;
+    color: black;
+}
+button {
+    box-shadow: 0 .4em #999;
+    color: white;
+    border-radius: 15%;
+    background-color: grey;
+    border: 0;
+    padding: 10;
+    
+}
+
 /* Optional: Makes the sample page fill the window. */
 html,
 body {
     background-color: black;
     height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
+    color: white;
 }

@@ -1,4 +1,4 @@
-var map, marker, panorama, marker2, infowindow, coords, contentString, answer;
+var map, marker, panorama, marker2, coords, contentString, answer, path;
 
 function initMap() 
 {
@@ -37,10 +37,10 @@ function initMap()
             zoomControl: true,
             mapTypeControl: true,
             scaleControl: true,
-            streetViewControl: true,
+            streetViewControl: true, // 
             rotateControl: true,
             fullscreenControl: true,
-            linksControl: true,
+            linksControl: true, // needs to get disable for no moving 
             panControl: true
     });
     
@@ -61,6 +61,40 @@ function moveMarker(pnt)
 {
     marker.setPosition(pnt);
 }
+
+function noMoving() 
+{
+    var panoOptions = {
+        disableDefaultUI: true,
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        streetViewControl: false, // 
+        rotateControl: true,
+        fullscreenControl: true,
+        linksControl: false, // needs to get disable for no moving 
+        panControl: true,
+        clickToGo: false
+    };
+    window.panorama.setOptions(panoOptions);
+}
+
+function moving() {
+    var panoOptions = {
+        disableDefaultUI: true,
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        streetViewControl: true, // 
+        rotateControl: true,
+        fullscreenControl: true,
+        linksControl: true, // needs to get disable for no moving 
+        panControl: true,
+        clickToGo: true
+    };
+    window.panorama.setOptions(panoOptions);
+}
+
 function changeMap(num) {
     if (num == 2) {
         map.setMapTypeId('nightMode');
@@ -78,11 +112,14 @@ function newSpot()
     try {
         marker2.setMap(null);
         marker2 = null;
+        path.setMap(null);
+        path = null;
+        
     }
-    catch {}
+    catch(err) {}
     finally {
         var sv = new google.maps.StreetViewService();
-        sv.getPanorama({location: {lat: getRandomLatLng(90), lng: getRandomLatLng(180)}, preference: 'best', radius: 50000, source: 'outdoor'}, processSVData);
+        sv.getPanorama({location: {lat: getRandomLatLng(90), lng: getRandomLatLng(180)}, preference: 'best', radius: 100000, source: 'outdoor'}, processSVData);
     }
 }
 
@@ -102,25 +139,47 @@ function guess()
     var lng1 = panorama.getPosition().lng();
     var lat2 = marker.getPosition().lat();
     var lng2 = marker.getPosition().lng();
-    
-    answer = metertoMile(haversine(lat1, lat2, lng1, lng2)).toFixed(3).toString() + " Miles Away";
-        var image = {
-        url: './images/correct_ping_white_outline.png',
-        // This marker is 20 pixels wide by 32 pixels high.
+    try {
+        marker2.setMap(null);
+        marker2 = null;
+        path.setMap(null);
+        path = null;
+        
     }
-    contentString = '<div id="content">'+'Your were :' + '<div id="result">' + answer
-      +'</div>';
-    infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-    marker2 = new google.maps.Marker({
-        position: panorama.getPosition(),
-        map: map,
-        draggable:false,
-        icon: image,
-        title: "location"
-    });
-    displayPopup(contentString);
+    catch (err) {}
+    finally {
+        answer = metertoMile(haversine(lat1, lat2, lng1, lng2)).toFixed(3);
+        if (answer < 1) answer = (answer * 5280).toString() + " Feet Away";
+        else answer = answer.toString() + " Miles Away";
+        var image = {
+            url: './images/correct_ping_white_outline.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+        }
+        contentString = '<div id="result">'+'Your were :' + '<div id="result">' + answer;
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        marker2 = new google.maps.Marker({
+            position: panorama.getPosition(),
+            map: map,
+            draggable:false,
+            icon: image,
+            title: "location"
+        });
+        var pathCoordinates = [
+            marker2.getPosition(),
+            marker.getPosition()
+        ];
+        path = new google.maps.Polyline({
+            path: pathCoordinates,
+            geodesic: true,
+            strokecolor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+        path.setMap(map);
+        infowindow.open(map, marker2);
+    }
 }
 
 function haversine(lat1, lat2, lng1, lng2)

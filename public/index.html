@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Geo Hunter</title>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsxh8outvRYcXeLoYONFgDnpckEOXMC0U&callback=initMap&libraries=&v=weekly"
-        defer
-        ></script>
+        <title> Geo Guesser FREE </title>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDtbM-TUFvKqmWPfjf4_HPUYBcyy0384&callback=initMap&libraries=&v=weekly"
+        defer
+        ></script>
+
         <script type ="text/javascript" src="./app.js"></script>
         <script type ="text/javascript" src="./skins.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D62YFQXCS"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165938855-3"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-0D62YFQXCS');
+        gtag('config', 'UA-165938855-3');
         </script>
     </head>
     <body>
         <div class="parent">
         <table align = "center">
             <tr>
-                <td> <button type="button" class= "controls" onclick="newSpot()">Play</button>
-                <td> <button type="button" class= "controls" onclick="guess()">Guess</button>
-                <td id="result">
+                <td class="controlsContainer"> <button type="button"  class="controls" onclick="newSpot()">Play</button>
+                <td class="controlsContainer"> <button type="button" class="controls" onclick="guess()">Guess</button>
         </table>
+        <br>
+        <br>
         <table id = "mapSettingsContainer">
             <tr>
-                <td align="center" colspan="3" id="result"> Map Settings
+                <td align="center" colspan="3" class="titles"> Map Settings
+                <td align="center" colspan="2" class="titles"> Game Settings
             <tr>
                 <td> <button type="button" class="mapSettings" onclick="changeMap(0)">Standard</button>
                 <td> <button type="button" class="mapSettings" onclick="changeMap(1)">Dark</button>
-                <td> <button type="button" class="mapSettings" onclick="changeMap(2)">Night</button>
+                <td> <button type="button" class="mapSettings" onclick="changeMap(2)">Night</button>            
+                <td> <button type="button" class="mapSettings" onclick="moving()">Moving</button>
+                <td> <button type="button" class="mapSettings" onclick="noMoving()">No Moving</button>
         </table>
             <div id="gameContainer">
             <div id="pano"></div>
