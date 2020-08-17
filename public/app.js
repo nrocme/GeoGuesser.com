@@ -1,5 +1,26 @@
-var map, marker, panorama, marker2, coords, contentString, answer, path;
+var map, marker, panorama, marker2, coords, contentString, answer, path, timeStart;
 
+    // Set the configuration for your app
+    // TODO: Replace with your project's config object
+    //   var config = {
+    //     apiKey: "AIzaSyDfG1-uB_XtgAhKkrpqdzRTAbL7tR9gRJ0 ",
+    //     authDomain: "geo-guesser-clone.firebaseapp.com",
+    //     databaseURL: "https://geo-guesser-clone.firebaseio.com",
+    //   };
+    //   firebase.initializeApp(config);
+    // 
+    //   // Get a reference to the database service
+    var database = firebase.database().ref();
+    database.on('value', snapshot => {
+    console.log(snapshot.val());
+    });
+function start() {
+    timeStart = new Date().getTime();
+}
+function play() {
+    newSpot();
+    start();
+}
 function initMap() 
 {
     var image = {
@@ -135,6 +156,7 @@ function processSVData(data, status)
 
 function guess() 
 {
+    formatTime((new Date().getTime() - timeStart )/ 1000);
     var lat1 = panorama.getPosition().lat();
     var lng1 = panorama.getPosition().lng();
     var lat2 = marker.getPosition().lat();
@@ -200,6 +222,20 @@ function haversine(lat1, lat2, lng1, lng2)
     return d;
 }
 
+function formatTime(seconds) {
+    
+    if (seconds < 60) {
+        document.getElementById("time").innerHTML = seconds.toFixed(2)+ " s"
+    }
+    else if (seconds < 3600) {
+        document.getElementById("time").innerHTML = Math.floor(seconds/60) +  " m " + (seconds%60).toFixed(2) + " s";
+    }
+    else {
+        document.getElementById("time").innerHTML = Math.floor(seconds/3600) +  " h" + (seconds%3600).toFixed(2) + " m" + ((seconds%3600)%60).toFixed(2) + " s";
+    }
+}
+
+//
 function metertoMile(meters)
 {
     return meters * 0.00062137;

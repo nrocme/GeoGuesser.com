@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Geo Guesser FREE </title>
+        <title> Where Am I? </title>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="./stylesheet.css">
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDtbM-TUFvKqmWPfjf4_HPUYBcyy0384&callback=initMap&libraries=&v=weekly"
-        defer
+
+        <script defer type ="text/javascript" src="./app.js"></script>
+        <script defer type ="text/javascript" src="./skins.js"></script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdu1u0U9rAakfZMrPyqbophsOh6bfM5sc&callback=initMap&libraries=&v=weekly"
         ></script>
 
-        <script type ="text/javascript" src="./app.js"></script>
-        <script type ="text/javascript" src="./skins.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165938855-3"></script>
         <script>
@@ -24,10 +24,14 @@
     </head>
     <body>
         <div class="parent">
+        <h1 align="center"> WHERE AM I?</h1>
+        <br>
+        <br>
         <table align = "center">
-            <tr>
-                <td class="controlsContainer"> <button type="button"  class="controls" onclick="newSpot()">Play</button>
+            <tr> 
+                <td class="controlsContainer"> <button type="button"  class="controls" onclick="play()">Play</button>
                 <td class="controlsContainer"> <button type="button" class="controls" onclick="guess()">Guess</button>
+                <td id="time">
         </table>
         <br>
         <br>
@@ -36,16 +40,28 @@
                 <td align="center" colspan="3" class="titles"> Map Settings
                 <td align="center" colspan="2" class="titles"> Game Settings
             <tr>
+                <th colspan="5"> 
+            <tr>
                 <td> <button type="button" class="mapSettings" onclick="changeMap(0)">Standard</button>
                 <td> <button type="button" class="mapSettings" onclick="changeMap(1)">Dark</button>
-                <td> <button type="button" class="mapSettings" onclick="changeMap(2)">Night</button>            
+                <td> <button type="button" class="mapSettings" onclick="changeMap(2)">Night</button>  
                 <td> <button type="button" class="mapSettings" onclick="moving()">Moving</button>
                 <td> <button type="button" class="mapSettings" onclick="noMoving()">No Moving</button>
         </table>
+        <br>
             <div id="gameContainer">
             <div id="pano"></div>
             <div id="map"></div>
             </div>
         </div>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.15.5/firebase-app.js"></script>
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.15.5/firebase-database.js"></script>
+        <script src="/__/firebase/7.15.5/firebase-functions.js"></script>
+        <script src="/__/firebase/init.js"></script>
+
     </body>
 </html>

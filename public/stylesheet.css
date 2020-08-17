@@ -46,6 +46,9 @@
     margin-top: 2%;
 }
 
+h1 {
+    font-size: 4em;
+}
 button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -64,6 +67,11 @@ button {
     padding: 10;
     
 }
+table { 
+    border-collapse:separate; 
+        border-spacing: 1em;
+}
+table th { border-bottom: .25em solid white; }
 
 /* Optional: Makes the sample page fill the window. */
 html,
