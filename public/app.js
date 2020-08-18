@@ -1,4 +1,4 @@
-var map, marker, panorama, marker2, coords, contentString, answer, path, timeStart;
+var map, marker, panorama, marker2, coords, contentString, answer, path, timeStart, startLoc;
 
     // Set the configuration for your app
     // TODO: Replace with your project's config object
@@ -14,13 +14,24 @@ var map, marker, panorama, marker2, coords, contentString, answer, path, timeSta
     database.on('value', snapshot => {
     console.log(snapshot.val());
     });
+  
+    
 function start() {
     timeStart = new Date().getTime();
 }
+
+
 function play() {
     newSpot();
     start();
 }
+
+
+function reset() {
+    panorama.setPano(startLoc);
+}
+
+
 function initMap() 
 {
     var image = {
@@ -28,7 +39,7 @@ function initMap()
     }
 
     coords = {lat: 0, lng: 0}
-    newSpot();
+    play();
     var nightType = new google.maps.StyledMapType(nightMode, {name: 'nightMode'});
     var darkType = new google.maps.StyledMapType(darkMode, {name: 'darkMode'});
     var standardType = new google.maps.StyledMapType(standardMode, {name: 'standardMode'});
@@ -78,10 +89,12 @@ function initMap()
     });
 }
 
+
 function moveMarker(pnt) 
 {
     marker.setPosition(pnt);
 }
+
 
 function noMoving() 
 {
@@ -100,6 +113,7 @@ function noMoving()
     window.panorama.setOptions(panoOptions);
 }
 
+
 function moving() {
     var panoOptions = {
         disableDefaultUI: true,
@@ -116,6 +130,7 @@ function moving() {
     window.panorama.setOptions(panoOptions);
 }
 
+
 function changeMap(num) {
     if (num == 2) {
         map.setMapTypeId('nightMode');
@@ -127,6 +142,7 @@ function changeMap(num) {
         map.setMapTypeId('standardMode');
     }
 }
+
 
 function newSpot() 
 {
@@ -148,6 +164,7 @@ function processSVData(data, status)
 {
     if (status === 'OK') {
         panorama.setPano(data.location.pano);
+        startLoc = panorama.getPano();
     } else {
         newSpot();
     }
@@ -223,7 +240,7 @@ function haversine(lat1, lat2, lng1, lng2)
 }
 
 function formatTime(seconds) {
-    
+    console.log(seconds);
     if (seconds < 60) {
         document.getElementById("time").innerHTML = seconds.toFixed(2)+ " s"
     }
