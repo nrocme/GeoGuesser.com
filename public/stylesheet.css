@@ -35,6 +35,10 @@
     width: 95%;
     z-index: 0;
 }
+
+#pano text {
+    display: none;
+}
 #mapSettingsContainer {
     margin-left: 5%;
 }

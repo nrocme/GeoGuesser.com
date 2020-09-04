@@ -10,10 +10,6 @@ var map, marker, panorama, marker2, coords, contentString, answer, path, timeSta
     //   firebase.initializeApp(config);
     // 
     //   // Get a reference to the database service
-    var database = firebase.database().ref();
-    database.on('value', snapshot => {
-    console.log(snapshot.val());
-    });
   
     
 function start() {
@@ -70,6 +66,7 @@ function initMap()
             mapTypeControl: true,
             scaleControl: true,
             streetViewControl: true, // 
+            showRoadLabels: false,
             rotateControl: true,
             fullscreenControl: true,
             linksControl: true, // needs to get disable for no moving 
